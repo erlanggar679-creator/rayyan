@@ -4,124 +4,565 @@
     <meta charset="UTF-8">
     <title>KJ Auto Garage | Jual Beli Mobil Kebon Jeruk</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
+        :root {
+            --primary: #e63946;
+            --secondary: #1d3557;
+            --accent: #457b9d;
+            --light: #f1faee;
+            --dark: #111;
+            --gray: #8d99ae;
+        }
+        
+        * {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f4f4;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
             color: #333;
+            line-height: 1.6;
         }
+        
+        /* Header */
         header {
-            background: #111;
-            color: #fff;
-            padding: 20px;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)), 
+                        url('https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 20px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
-        section {
-            padding: 30px;
-            max-width: 1000px;
-            margin: auto;
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
-        h2 {
-            color: #111;
-            border-bottom: 3px solid #e63946;
-            display: inline-block;
+        
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        h1 {
+            font-size: 3.5rem;
             margin-bottom: 15px;
+            letter-spacing: 1px;
         }
-        .menu {
+        
+        .tagline {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            color: var(--light);
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: var(--secondary);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* Section */
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        section:nth-child(even) {
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            display: inline-block;
+            padding-bottom: 15px;
+            position: relative;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background-color: var(--primary);
+        }
+        
+        /* Car Grid */
+        .car-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
         }
-        .card {
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        
+        .car-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
         }
-        .card h3 {
-            margin-top: 0;
+        
+        .car-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
+        
+        .car-img {
+            height: 200px;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.5s;
+        }
+        
+        .car-card:hover .car-img {
+            transform: scale(1.05);
+        }
+        
+        .car-info {
+            padding: 25px;
+        }
+        
+        .car-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+        
+        .car-specs {
+            color: var(--gray);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .car-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .contact-info {
+            font-size: 1.1rem;
+        }
+        
+        .contact-info i {
+            color: var(--primary);
+            margin-right: 10px;
+            width: 25px;
+        }
+        
+        .contact-detail {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        /* Buttons */
         .btn {
             display: inline-block;
-            margin-top: 10px;
-            background: #e63946;
-            color: #fff;
-            padding: 10px 15px;
+            background: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
             text-decoration: none;
-            border-radius: 5px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(230, 57, 70, 0.3);
         }
+        
+        .btn:hover {
+            background: #c1121f;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(230, 57, 70, 0.4);
+        }
+        
+        .btn-large {
+            padding: 15px 40px;
+            font-size: 1.1rem;
+        }
+        
+        /* Footer */
         footer {
-            background: #111;
-            color: #fff;
+            background: var(--dark);
+            color: white;
+            padding: 60px 20px 30px;
             text-align: center;
-            padding: 20px;
         }
-        a {
-            color: #e63946;
-            text-decoration: none;
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            text-align: left;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .social-links {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 15px;
+            }
+            
+            .nav-links li {
+                margin: 0 10px;
+            }
+            
+            section {
+                padding: 60px 20px;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-
-<header>
-    <h1>KJ Auto Garage</h1>
-    <p>Jual Beli Mobil Berkualitas • Kebon Jeruk, Jakarta Barat</p>
-</header>
-
-<section>
-    <h2>Daftar Mobil</h2>
-    <div class="menu">
-        <div class="card">
-            <h3>Toyota Avanza 2019</h3>
-            <p>Manual • Bensin</p>
-            <strong>Rp145.000.000</strong>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-car"></i>
+            </div>
+            <h1>KJ Auto Garage</h1>
+            <p class="tagline">Jual Beli Mobil Berkualitas • Kebon Jeruk, Jakarta Barat</p>
+            <a href="#cars" class="btn btn-large">Lihat Koleksi Mobil</a>
         </div>
-        <div class="card">
-            <h3>Daihatsu Xenia 2020</h3>
-            <p>Manual • Bensin</p>
-            <strong>Rp155.000.000</strong>
+    </header>
+    
+    <nav>
+        <div class="nav-container">
+            <div class="logo-text">KJ Auto Garage</div>
+            <ul class="nav-links">
+                <li><a href="#home">Beranda</a></li>
+                <li><a href="#cars">Mobil</a></li>
+                <li><a href="#contact">Kontak</a></li>
+                <li><a href="#about">Tentang Kami</a></li>
+            </ul>
         </div>
-        <div class="card">
-            <h3>Honda Brio 2021</h3>
-            <p>Automatic • Bensin</p>
-            <strong>Rp175.000.000</strong>
+    </nav>
+    
+    <section id="cars">
+        <div class="section-title">
+            <h2>Daftar Mobil Terbaru</h2>
+            <p>Temukan mobil impian Anda di koleksi terbaru kami</p>
         </div>
-        <div class="card">
-            <h3>Toyota Rush 2020</h3>
-            <p>Automatic • Bensin</p>
-            <strong>Rp185.000.000</strong>
+        
+        <div class="car-grid">
+            <!-- Mobil 1 -->
+            <div class="car-card">
+                <div class="car-img" style="background-image: url('https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="car-info">
+                    <h3>Toyota Avanza 2019</h3>
+                    <p class="car-specs"><i class="fas fa-cog"></i> Manual • <i class="fas fa-gas-pump"></i> Bensin • <i class="fas fa-road"></i> 45,000 km</p>
+                    <div class="car-price">Rp145.000.000</div>
+                    <a href="https://wa.me/6281234567890?text=Saya%20tertarik%20dengan%20Toyota%20Avanza%202019" class="btn" target="_blank">Tanya Detail</a>
+                </div>
+            </div>
+            
+            <!-- Mobil 2 -->
+            <div class="car-card">
+                <div class="car-img" style="background-image: url('https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="car-info">
+                    <h3>Daihatsu Xenia 2020</h3>
+                    <p class="car-specs"><i class="fas fa-cog"></i> Manual • <i class="fas fa-gas-pump"></i> Bensin • <i class="fas fa-road"></i> 30,000 km</p>
+                    <div class="car-price">Rp155.000.000</div>
+                    <a href="https://wa.me/6281234567890?text=Saya%20tertarik%20dengan%20Daihatsu%20Xenia%202020" class="btn" target="_blank">Tanya Detail</a>
+                </div>
+            </div>
+            
+            <!-- Mobil 3 -->
+            <div class="car-card">
+                <div class="car-img" style="background-image: url('https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="car-info">
+                    <h3>Honda Brio 2021</h3>
+                    <p class="car-specs"><i class="fas fa-cog"></i> Automatic • <i class="fas fa-gas-pump"></i> Bensin • <i class="fas fa-road"></i> 20,000 km</p>
+                    <div class="car-price">Rp175.000.000</div>
+                    <a href="https://wa.me/6281234567890?text=Saya%20tertarik%20dengan%20Honda%20Brio%202021" class="btn" target="_blank">Tanya Detail</a>
+                </div>
+            </div>
+            
+            <!-- Mobil 4 -->
+            <div class="car-card">
+                <div class="car-img" style="background-image: url('https://images.unsplash.com/photo-1566474596043-1d5d2d7e8b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="car-info">
+                    <h3>Toyota Rush 2020</h3>
+                    <p class="car-specs"><i class="fas fa-cog"></i> Automatic • <i class="fas fa-gas-pump"></i> Bensin • <i class="fas fa-road"></i> 35,000 km</p>
+                    <div class="car-price">Rp185.000.000</div>
+                    <a href="https://wa.me/6281234567890?text=Saya%20tertarik%20dengan%20Toyota%20Rush%202020" class="btn" target="_blank">Tanya Detail</a>
+                </div>
+            </div>
+            
+            <!-- Mobil 5 -->
+            <div class="car-card">
+                <div class="car-img" style="background-image: url('https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="car-info">
+                    <h3>Mitsubishi Xpander 2021</h3>
+                    <p class="car-specs"><i class="fas fa-cog"></i> Automatic • <i class="fas fa-gas-pump"></i> Bensin • <i class="fas fa-road"></i> 25,000 km</p>
+                    <div class="car-price">Rp215.000.000</div>
+                    <a href="https://wa.me/6281234567890?text=Saya%20tertarik%20dengan%20Mitsubishi%20Xpander%202021" class="btn" target="_blank">Tanya Detail</a>
+                </div>
+            </div>
         </div>
-        <div class="card">
-            <h3>Mitsubishi Xpander 2021</h3>
-            <p>Automatic • Bensin</p>
-            <strong>Rp215.000.000</strong>
+    </section>
+    
+    <section id="contact">
+        <div class="section-title">
+            <h2>Hubungi Kami</h2>
+            <p>Kami siap membantu Anda menemukan mobil impian</p>
         </div>
-    </div>
-</section>
-
-<section>
-    <h2>Pemesanan Online</h2>
-    <p>
-        📍 Lokasi: Kebon Jeruk, Jakarta Barat <br><br>
-        📞 WhatsApp: 
-        <a href="https://wa.me/6281234567890" target="_blank">
-            0812-3456-7890
-        </a><br><br>
-        📸 Instagram: 
-        <a href="https://instagram.com/kjautogarage" target="_blank">
-            @kjautogarage
-        </a>
-    </p>
-    <a class="btn" href="https://wa.me/6281234567890" target="_blank">
-        Hubungi via WhatsApp
-    </a>
-</section>
-
-<footer>
-    <p>© 2026 KJ Auto Garage • Trusted Car Partner</p>
-</footer>
-
+        
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-detail">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <strong>Lokasi</strong><br>
+                        Kebon Jeruk, Jakarta Barat
+                    </div>
+                </div>
+                
+                <div class="contact-detail">
+                    <i class="fab fa-whatsapp"></i>
+                    <div>
+                        <strong>WhatsApp</strong><br>
+                        <a href="https://wa.me/6281234567890" target="_blank">0812-3456-7890</a>
+                    </div>
+                </div>
+                
+                <div class="contact-detail">
+                    <i class="fab fa-instagram"></i>
+                    <div>
+                        <strong>Instagram</strong><br>
+                        <a href="https://instagram.com/kjautogarage" target="_blank">@kjautogarage</a>
+                    </div>
+                </div>
+                
+                <div class="contact-detail">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <strong>Jam Operasional</strong><br>
+                        Senin - Minggu: 08.00 - 20.00 WIB
+                    </div>
+                </div>
+                
+                <a href="https://wa.me/6281234567890" class="btn btn-large" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Hubungi via WhatsApp
+                </a>
+            </div>
+            
+            <div class="contact-map">
+                <!-- Placeholder untuk peta -->
+                <div style="background: #ddd; height: 300px; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                    <div style="text-align: center;">
+                        <i class="fas fa-map" style="font-size: 4rem; color: var(--gray); margin-bottom: 15px;"></i>
+                        <p>Peta Lokasi KJ Auto Garage</p>
+                        <p>Kebon Jeruk, Jakarta Barat</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <i class="fas fa-car"></i>
+                </div>
+                <p>KJ Auto Garage adalah dealer mobil terpercaya di Kebon Jeruk, Jakarta Barat. Kami menyediakan berbagai mobil berkualitas dengan harga kompetitif.</p>
+                <div class="social-links">
+                    <a href="https://instagram.com/kjautogarage" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://facebook.com/kjautogarage" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://wa.me/6281234567890" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="mailto:info@kjautogarage.com" target="_blank"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Link Cepat</h3>
+                <ul style="list-style: none; margin-top: 15px;">
+                    <li style="margin-bottom: 10px;"><a href="#home" style="color: #ccc;">Beranda</a></li>
+                    <li style="margin-bottom: 10px;"><a href="#cars" style="color: #ccc;">Daftar Mobil</a></li>
+                    <li style="margin-bottom: 10px;"><a href="#contact" style="color: #ccc;">Kontak Kami</a></li>
+                    <li style="margin-bottom: 10px;"><a href="#about" style="color: #ccc;">Tentang Kami</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact">
+                <h3>Kontak</h3>
+                <p style="margin-top: 15px; color: #ccc;">
+                    <i class="fas fa-map-marker-alt" style="color: var(--primary); margin-right: 10px;"></i>
+                    Kebon Jeruk, Jakarta Barat
+                </p>
+                <p style="margin-top: 10px; color: #ccc;">
+                    <i class="fas fa-phone" style="color: var(--primary); margin-right: 10px;"></i>
+                    0812-3456-7890
+                </p>
+                <p style="margin-top: 10px; color: #ccc;">
+                    <i class="fas fa-envelope" style="color: var(--primary); margin-right: 10px;"></i>
+                    info@kjautogarage.com
+                </p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>© 2026 KJ Auto Garage • Trusted Car Partner • All Rights Reserved</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Smooth scrolling untuk navigasi
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Animasi untuk card mobil saat scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Terapkan animasi pada card mobil
+        document.querySelectorAll('.car-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s, transform 0.5s';
+            observer.observe(card);
+        });
+    </script>
 </body>
 </html>
